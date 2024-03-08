@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CursoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-   return 'Bienvenido a la pagina web porno mas grande del mundo';
-});
+Route::get('/', HomeController::class);
 
-Route::get('cursos', function (){
-   return 'bienvenidos a curso';
-});
+Route::controller(CursoController::class)-> group(function(){
 
-Route ::get('cursos/{curso}', function($curso){
-   return "Bienvenidos al curso: $curso";
+   Route::get('cursos','index');
+   Route::get('cursos/create', 'create');
+   Route ::get('cursos/{curso}', 'show');
+
 });
